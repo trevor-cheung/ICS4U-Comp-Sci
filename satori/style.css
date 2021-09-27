@@ -1,0 +1,101 @@
+body::before {
+    display: block;
+    content: '';
+    height: 60px;
+  }
+  
+  #map {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+  
+  @media (min-width: 768px) {
+    .news-input {
+        width: 50%;
+    }
+
+    .showcase-img {
+        max-width:50%;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    #services .card {
+      width: 88%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .card-img{
+    opacity: 0.4;
+  }
+
+  .card-img-overlay{
+    align-content: center;
+  }
+
+  .row-even{
+    background-color: #e6e6e6;
+  }
+
+  #map {
+    width: 100%;
+    height: 48%;
+    border-radius: 10px;
+  }
+
+  .bg-aqua{
+    background-color: #2bbacb;
+  }
+
+  .bg-green{
+    background-color: darkgreen;
+  }
+
+  .text-aqua{
+    color: #2bbacb;
+  }
+
+  .text-green{
+    color: darkgreen;
+  }
+
+  .link-aqua{
+    color: #2bbacb;
+  }
+
+  .link-aqua:hover{
+    color: #1e8b97;
+  }
+
+  .link-light:hover{
+    color: lightgray;
+  }
+  
+  .link-green{
+    color:darkgreen;
+  }
+
+  .link-green:hover{
+    color:rgb(1, 70, 1);
+  }
+
+  .bi-arrow-up-circle{
+    color: #2bbacb;
+  }
+
+  .btn-aqua{
+    background-color: #2bbacb;
+    color: white;
+  }
+
+  .btn-aqua:hover{
+    background-color: #1e8b97;
+    color: white;
+  }
+
+  
+
+  
