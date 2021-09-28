@@ -1,8 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 body::before {
     display: block;
     content: '';
     height: 60px;
   }
+
+body{
+  font-family: 'Muli', sans-serif;
+}
+
+body p{
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#about p{
+  font-size: 16px;
+}
   
   #map {
     width: 100%;
@@ -37,7 +53,7 @@ body::before {
   }
 
   .row-even{
-    background-color: #e6e6e6;
+    background-color: #e6e6fa;
   }
 
   #map {
@@ -50,8 +66,16 @@ body::before {
     background-color: #2bbacb;
   }
 
+  .bg-aqua-muted{
+    background-color: #65c4d18a;
+  }
+
   .bg-green{
     background-color: darkgreen;
+  }
+
+  .bg-lavender{
+    background-color: lavender;
   }
 
   .text-aqua{
@@ -82,6 +106,14 @@ body::before {
     color:rgb(1, 70, 1);
   }
 
+  .link-lavender{
+    color:lavender;
+  }
+
+  .link-lavender:hover{
+    color:rgb(212, 212, 252);
+  }
+
   .bi-arrow-up-circle{
     color: #2bbacb;
   }
@@ -94,6 +126,16 @@ body::before {
   .btn-aqua:hover{
     background-color: #1e8b97;
     color: white;
+  }
+
+  .btn-lavender{
+    background-color: rgb(212, 212, 252);
+    color: black;
+  }
+
+  .btn-lavender:hover{
+    background-color: rgb(194, 194, 250);
+    color: black;
   }
 
   
