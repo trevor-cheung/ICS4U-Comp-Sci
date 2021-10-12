@@ -15,89 +15,102 @@ sort('name');
 
 console.log(userRecords);
 
-function sliceUserRecords (page){
-    slicedRecords = userRecords.slice(10 * (page - 1), 10 * page);
+function sliceUserRecords(page) {
+   slicedRecords = userRecords.slice(10 * (page - 1), 10 * page);
 }
 
 function sliceFilteredUserRecords(page) {
-    slicedFilteredRecords = filteredRecords.slice(10 * (page - 1), 10 * page);
+   slicedFilteredRecords = filteredRecords.slice(10 * (page - 1), 10 * page);
 }
 
 function getTenUsers(page) {
-    document.querySelector('#rows').innerHTML = '';
-    filterValue = document.querySelector('#filter').value;
-    if (filterValue != '') {
-        sliceFilteredUserRecords(page);
-        currentPage = page;
-        slicedFilteredRecords.forEach(user => { let row = createRow(user); document.querySelector('#rows').appendChild(row); })
-    } else {
-        sliceUserRecords(page);
-        currentPage = page;
-        slicedRecords.forEach(user => { let row = createRow(user); document.querySelector('#rows').appendChild(row); });
-    }
+   activeButton();
+   let temp = currentPage;
+   document.querySelector('#rows').innerHTML = '';
+   filterValue = document.querySelector('#filter').value;
+   if (filterValue != '') {
+      sliceFilteredUserRecords(page);
+      currentPage = page;
+      slicedFilteredRecords.forEach(user => { let row = createRow(user); document.querySelector('#rows').appendChild(row); })
+   } else {
+      sliceUserRecords(page);
+      currentPage = page;
+      slicedRecords.forEach(user => { let row = createRow(user); document.querySelector('#rows').appendChild(row); });
+   }
+   inactiveButton(temp);
 }
 
 function createRow(user) {
-    let newRow = document.createElement('tr');
-    newRow.setAttribute('scope', 'row');
-    let newCell = document.createElement('td');
-    newCell.appendChild(document.createTextNode(user.name));
-    newRow.appendChild(newCell);
-    newCell = document.createElement('td');
-    newCell.appendChild(document.createTextNode(user.email));
-    newRow.appendChild(newCell);
-    newCell = document.createElement('td');
-    newCell.appendChild(document.createTextNode(user.gender));
-    newRow.appendChild(newCell);
-    newCell = document.createElement('td');
-    newCell.appendChild(document.createTextNode(user.status));
-    newRow.appendChild(newCell);
- 
-    return newRow;
+   let newRow = document.createElement('tr');
+   newRow.setAttribute('scope', 'row');
+   let newCell = document.createElement('td');
+   newCell.appendChild(document.createTextNode(user.name));
+   newRow.appendChild(newCell);
+   newCell = document.createElement('td');
+   newCell.appendChild(document.createTextNode(user.email));
+   newRow.appendChild(newCell);
+   newCell = document.createElement('td');
+   newCell.appendChild(document.createTextNode(user.gender));
+   newRow.appendChild(newCell);
+   newCell = document.createElement('td');
+   newCell.appendChild(document.createTextNode(user.status));
+   newRow.appendChild(newCell);
+
+   return newRow;
 }
 
 function sort(field) {
-    if (field === undefined) {
-       // called from filter
-       field = currentSortField;
-    } else if (field === currentSortField) {
-       sortDirection = sortDirection === 'ASC' ? 'DESC' : 'ASC';
-       currentSortField = field;
-    } else {
-       sortDirection = 'ASC';
-       currentSortField = field;
-    }
- 
-    if (sortDirection === 'ASC') {
-       if (field === 'name') {
-          userRecords.sort((a, b) => a.name.localeCompare(b.name));
-       } else if (field === 'email') {
-          userRecords.sort((a, b) => a.email.localeCompare(b.email));
-       } else if (field === 'gender') {
-          userRecords.sort((a, b) => a.gender.localeCompare(b.gender));
-       } else if (field === 'status') {
-          userRecords.sort((a, b) => a.status.localeCompare(b.status));
-       }
-    } else if (sortDirection === 'DESC') {
-       if (field === 'name') {
-          userRecords.sort((a, b) => b.name.localeCompare(a.name));
-       } else if (field === 'email') {
-          userRecords.sort((a, b) => b.email.localeCompare(a.email));
-       } else if (field === 'gender') {
-          userRecords.sort((a, b) => b.gender.localeCompare(a.gender));
-       } else if (field === 'status') {
-          userRecords.sort((a, b) => b.status.localeCompare(a.status));
-       }
-    }
- 
-    getTenUsers(currentPage);
- }
+   if (field === undefined) {
+      // called from filter
+      field = currentSortField;
+   } else if (field === currentSortField) {
+      sortDirection = sortDirection === 'ASC' ? 'DESC' : 'ASC';
+      currentSortField = field;
+   } else {
+      sortDirection = 'ASC';
+      currentSortField = field;
+   }
 
- function filterUsers() {
-    let filterValue = document.querySelector('#filter').value;
-    filteredRecords = userRecords.filter(user => (user.name.toLowerCase().indexOf(filterValue.toLowerCase())) >= 0);
-    sort(); // field in sort will be undefined
-    getTenUsers(1);
- }
+   if (sortDirection === 'ASC') {
+      if (field === 'name') {
+         userRecords.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (field === 'email') {
+         userRecords.sort((a, b) => a.email.localeCompare(b.email));
+      } else if (field === 'gender') {
+         userRecords.sort((a, b) => a.gender.localeCompare(b.gender));
+      } else if (field === 'status') {
+         userRecords.sort((a, b) => a.status.localeCompare(b.status));
+      }
+   } else if (sortDirection === 'DESC') {
+      if (field === 'name') {
+         userRecords.sort((a, b) => b.name.localeCompare(a.name));
+      } else if (field === 'email') {
+         userRecords.sort((a, b) => b.email.localeCompare(a.email));
+      } else if (field === 'gender') {
+         userRecords.sort((a, b) => b.gender.localeCompare(a.gender));
+      } else if (field === 'status') {
+         userRecords.sort((a, b) => b.status.localeCompare(a.status));
+      }
+   }
+
+   getTenUsers(currentPage);
+}
+
+function filterUsers() {
+   let filterValue = document.querySelector('#filter').value;
+   filteredRecords = userRecords.filter(user => (user.name.toLowerCase().indexOf(filterValue.toLowerCase())) >= 0);
+   sort(); // field in sort will be undefined
+   getTenUsers(1);
+}
+
+function activeButton() {
+   let id = "btn" + currentPage;
+   document.querySelector(`#${id}`).setAttribute("class", "btn btn-outline-secondary active")
+}
+
+function inactiveButton(temp) {
+   let id = "btn" + temp;
+   document.querySelector(`#${id}`).setAttribute("class", "btn btn-outline-secondary")
+}
 
 getTenUsers(1);
