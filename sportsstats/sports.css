@@ -1,0 +1,13 @@
+.width-lg{
+    width: 70%;
+}
+
+.width-sm{
+    width: 10%;
+}
+
+@media(min-width: 768px) {
+    #scores-table{
+        width: 50%;
+    }
+}
