@@ -355,8 +355,8 @@ function inputGame() {
         container.insertBefore(createErrorMsg('Error: Please enter a valid team'), row1);
     }
     // if a date from an invalid year is inputted
-    else if (date.indexOf('2021') >= 0) {
-        container.insertBefore(createErrorMsg('Error: Please enter a valid date'), row1);
+    else if (!(date.indexOf('2021') >= 0)) {
+        container.insertBefore(createErrorMsg('Error: Please enter a valid date in 2021'), row1);
     }
     // creates a new game
     else {
