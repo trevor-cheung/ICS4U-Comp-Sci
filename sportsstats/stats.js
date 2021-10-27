@@ -398,7 +398,7 @@ function inputGame() {
     document.querySelector('#inputHomeErrors').value = '';
 }
 
-//Creates a text element with the style of an error from given text
+// creates a text element to let the user know that there is an error
 function createErrorMsg(msg) {
     let errorMsg = document.createElement('h4');
     errorMsg.appendChild(document.createTextNode(msg));
