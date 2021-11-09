@@ -74,7 +74,7 @@ function createRow(team) {
     newCell.appendChild(document.createTextNode(team.Losses));
     newRow.appendChild(newCell);
     newCell = document.createElement('td');
-    newCell.appendChild(document.createTextNode(team.Percentage.toFixed(3)));
+    newCell.appendChild(document.createTextNode(team.Percentage));
     newRow.appendChild(newCell);
     /*newCell = document.createElement('td');
     newCell.appendChild(document.createTextNode(team.GamesBehind));
@@ -373,8 +373,6 @@ function inputGame() {
         }
         allScores.push(game);
 
-        storeData();
-
         // updates the standings
         if (aTeamRuns > hTeamRuns) {
             awayTeam.Wins += 1;
@@ -385,6 +383,8 @@ function inputGame() {
         }
         awayTeam.Percentage = (awayTeam.Wins / (awayTeam.Wins + awayTeam.Losses)).toFixed(3);
         homeTeam.Percentage = (homeTeam.Wins / (homeTeam.Wins + homeTeam.Losses)).toFixed(3);
+    
+        storeData();
     }
 
     document.querySelector('#inputAwayTeam').value = '';
