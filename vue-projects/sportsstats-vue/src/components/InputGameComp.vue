@@ -75,7 +75,7 @@ export default {
           const data = await res.json();
           return data;
       },
-      inputGame() {
+      async inputGame() {
         let aTeam = document.querySelector('#inputAwayTeam').value;
         let hTeam = document.querySelector('#inputHomeTeam').value;
         let date = document.querySelector('#inputDate').value;
@@ -144,10 +144,11 @@ export default {
                 homeTeam.Wins += 1;
                 awayTeam.Losses += 1;
             }
-            awayTeam.Percentage = (awayTeam.Wins / (awayTeam.Wins + awayTeam.Losses)).toFixed(3);
-            homeTeam.Percentage = (homeTeam.Wins / (homeTeam.Wins + homeTeam.Losses)).toFixed(3);
+            awayTeam.Percentage = parseFloat((awayTeam.Wins / (awayTeam.Wins + awayTeam.Losses)).toFixed(3));
+            homeTeam.Percentage = parseFloat((homeTeam.Wins / (homeTeam.Wins + homeTeam.Losses)).toFixed(3));
         
-            this.updateStandings(game, awayTeam, homeTeam);
+            await this.updateStandings(awayTeam);
+            await this.updateStandings(homeTeam);
         }
 
         document.querySelector('#inputAwayTeam').value = '';
@@ -179,6 +180,41 @@ export default {
       },
       async deleteGame() {
         let id = document.querySelector('#deleteID').value;
+
+        let gameToDelete;
+        this.scores.forEach((score) => {
+          if (score.id == id)
+            gameToDelete = score;
+        })
+        console.log(gameToDelete);
+        
+        let awayTeam;
+        this.teams.forEach((team) => {
+          if (team.id === gameToDelete.AwayTeamID)
+            awayTeam = team;
+        })
+        console.log(awayTeam);
+        let homeTeam;
+        this.teams.forEach((team) => {
+          if (team.id === gameToDelete.HomeTeamID)
+            homeTeam = team;
+        })
+        console.log(homeTeam);
+        
+        // updates the standings
+        if (gameToDelete.AwayTeamRuns > gameToDelete.HomeTeamRuns) {
+            awayTeam.Wins -= 1;
+            homeTeam.Losses -= 1;
+        } else {
+            homeTeam.Wins -= 1;
+            awayTeam.Losses -= 1;
+        }
+        awayTeam.Percentage = parseFloat((awayTeam.Wins / (awayTeam.Wins + awayTeam.Losses)).toFixed(3));
+        homeTeam.Percentage = parseFloat((homeTeam.Wins / (homeTeam.Wins + homeTeam.Losses)).toFixed(3));
+    
+        await this.updateStandings(awayTeam);
+        await this.updateStandings(homeTeam);
+
         if (confirm('Are you sure?')) {
           const res = await fetch(`http://localhost:5000/scores/${id}`, {
             method: 'DELETE',
@@ -189,28 +225,17 @@ export default {
         }
         document.querySelector('#deleteID').value = '';
       },
-      async updateStandings(game, awayTeam, homeTeam) {
-        console.log(awayTeam);
-        console.log(homeTeam);
-        const res = await fetch(`http://localhost:5000/standings/${game.AwayTeamID}`, {
+      async updateStandings(team) {
+        console.log(team.id);
+        const res = await fetch(`http://localhost:5000/standings/${team.id}`, {
           method: 'PATCH',
           headers: {
             'Content-type': 'application/json',
           },
-          body: JSON.stringify(awayTeam),
+          body: JSON.stringify(team),
         });
         const data = await res.json();
         this.scores = [...this.scores, data];
-
-        const res2 = await fetch(`http://localhost:5000/standings/${game.HomeTeamID}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify(homeTeam),
-        });
-        const data2 = await res2.json();
-        this.scores = [...this.scores, data2];
       }
     },
     async mounted() {

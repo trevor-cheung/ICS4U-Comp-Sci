@@ -108,7 +108,7 @@ export default {
          newCell.appendChild(document.createTextNode(team.Losses));
          newRow.appendChild(newCell);
          newCell = document.createElement('td');
-         newCell.appendChild(document.createTextNode(team.Percentage));
+         newCell.appendChild(document.createTextNode(team.Percentage.toFixed(3)));
          newRow.appendChild(newCell);
          
          return newRow;
