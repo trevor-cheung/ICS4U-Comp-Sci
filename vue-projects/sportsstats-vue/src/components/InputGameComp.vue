@@ -43,12 +43,14 @@
             <button class="btn btn-dark ms-2 mt-3 col-md-2" type="button" @click="inputGame()">Submit</button>
           </form>
           <hr>
-          <form class="row g-3">
-            <div class="col-md-4">
+          <form class="row g-3 mx-auto">
+            <div class="col-md">
               <label for="deleteID" class="form-label">Game ID To Delete</label>
               <input type="text" class="form-control" id="deleteID">
             </div>
-            <button class="btn btn-dark ms-2 mt-3 col-md-2" type="button" @click="deleteGame()">Delete</button>
+            <div class="row mx-auto">
+              <button class="btn btn-dark mt-3 col-md" type="button" @click="deleteGame()">Delete</button>              
+            </div>
           </form>  
         </div>
       </div>
