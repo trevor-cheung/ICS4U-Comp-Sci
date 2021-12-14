@@ -19,6 +19,13 @@ app.use(bodyParser.json());
 
 app.use('/posts', postRoute);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(__dirname + "/dist/"));
+  app.get("*", (req, res) => {
+    res.sendFile(__dirname + "/dist/index.html/")
+  })
+}
+
 app.listen(PORT, function(){
   console.log('Server is running on Port:',PORT);
 });
